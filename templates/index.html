@@ -1,79 +1,13 @@
+-PYTHON\templates\index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webcam Object Detection</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        #video-container {
-            position: relative;
-            display: inline-block;
-        }
-        #video {
-            width: 640px;
-            height: 480px;
-            border: 2px solid #000;
-        }
-        #canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        #response {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #333;
-        }
-    </style>
+    <title>Student Companion App</title>
 </head>
 <body>
-    <h1>Webcam Object Detection</h1>
-    <div id="video-container">
-        <video id="video" autoplay></video>
-        <canvas id="canvas"></canvas>
-    </div>
-    <div id="response">Response will be displayed here.</div>
-    <script>
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const context = canvas.getContext('2d');
-        const responseDiv = document.getElementById('response');
-
-        // Set canvas size to match video
-        canvas.width = 640;
-        canvas.height = 480;
-
-        // Access webcam
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then((stream) => {
-                video.srcObject = stream;
-            })
-            .catch((error) => {
-                console.error('Error accessing webcam:', error);
-                responseDiv.textContent = 'Error accessing webcam: ' + error.message;
-            });
-
-        // Draw video frame on canvas for further processing
-        function drawFrame() {
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            // Placeholder for object detection logic
-            // Example: context.strokeRect(x, y, width, height); to outline objects
-
-            // Example response update (replace with actual detection logic)
-            responseDiv.textContent = 'Detecting objects...';
-
-            requestAnimationFrame(drawFrame);
-        }
-
-        video.addEventListener('play', () => {
-            drawFrame();
-        });
-    </script>
+    <h1>Webcam Feed - Desk Object Detection</h1>
+    <img src="{{ url_for('video_feed') }}" style="width: 50%; border: 2px solid black;">
 </body>
 </html>
